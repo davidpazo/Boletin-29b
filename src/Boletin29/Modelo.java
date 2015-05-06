@@ -19,44 +19,49 @@ public class Modelo {
     }
 
     public void añadirVelero(ArrayList<Barcos> listaB) {
-        listaB.add(new Veleros(this.pedirMatricula(), this.pedirEslora(), this.pedirDias(), this.pedirMastil()));
+        listaB.add(new Veleros(this.crearMatricula(), this.pedirEslora(), this.pedirDias(), this.pedirMastil()));
     }
 
     public void añadirDeportivo(ArrayList<Barcos> listaB) {
-        listaB.add(new Deportivos(this.pedirMatricula(), this.pedirEslora(), this.pedirDias(), this.pedirPotencia()));
+        listaB.add(new Deportivos(this.crearMatricula(), this.pedirEslora(), this.pedirDias(), this.pedirPotencia()));
     }
 
     public void añadirYate(ArrayList<Barcos> listaB) {
-        listaB.add(new Yates(this.pedirMatricula(), this.pedirEslora(), this.pedirDias(), this.pedirPotencia(), this.pedirCam()));
+        listaB.add(new Yates(this.crearMatricula(), this.pedirEslora(), this.pedirDias(), this.pedirPotencia(), this.pedirCam()));
     }
 
     public void añadirCarguero(ArrayList<Barcos> listaB) {
-        listaB.add(new Bcarga(this.pedirMatricula(), this.pedirEslora(), this.pedirDias(), this.pedirCarga()));
+        listaB.add(new Bcarga(this.crearMatricula(), this.pedirEslora(), this.pedirDias(), this.pedirCarga()));
     }
 
     public void amosar(Barcos b) {
         if (b instanceof Veleros) {
-            JOptionPane.showMessageDialog(null, "Velero:\nMatricula: " + b.getMatricula() + "\nEslora: "+b.getEslora() +"\nNumero de dias: "+ b.getNdias() + "\nNumero de mastiles"+((Veleros) b).getMastiles()+ "\nPrecio"+b.calcularAlq(b.calcularModulo(b)));
+            JOptionPane.showMessageDialog(null, "Velero:\nMatricula: " + b.getMatricula() + "\nEslora: " + b.getEslora() + "\nNumero de dias: " + b.getNdias() + "\nNumero de mastiles" + ((Veleros) b).getMastiles() + "\nPrecio" + b.calcularAlq(b.calcularModulo(b)) + "€");
         }
         if (b instanceof Deportivos) {
-            JOptionPane.showMessageDialog(null, "Deportivo:\nMatricula: " + b.getMatricula() + "\nEslora: "+b.getEslora() +"\nNumero de dias: "+ b.getNdias()+ "\nCV: "+((Deportivos)b).getDeporCV()+"\nPrecio alquiler: "+b.calcularAlq(b.calcularModulo(b)));
+            JOptionPane.showMessageDialog(null, "Deportivo:\nMatricula: " + b.getMatricula() + "\nEslora: " + b.getEslora() + "\nNumero de dias: " + b.getNdias() + "\nCV: " + ((Deportivos) b).getDeporCV() + "\nPrecio alquiler: " + b.calcularAlq(b.calcularModulo(b)) + "€");
         }
         if (b instanceof Yates) {
-            JOptionPane.showMessageDialog(null, "Yate:\nMatricula: " + b.getMatricula() + "\nEslora: "+b.getEslora() +"\nNumero de dias: "+ b.getNdias() +"\nPotencia: "+ ((Yates) b).getPotencia() + "\nNumero de camarotes: "+((Yates) b).getNumcamarotes()+ "\nPrecio: "+ b.calcularAlq(b.calcularModulo(b)));
+            JOptionPane.showMessageDialog(null, "Yate:\nMatricula: " + b.getMatricula() + "\nEslora: " + b.getEslora() + "\nNumero de dias: " + b.getNdias() + "\nPotencia: " + ((Yates) b).getPotencia() + "\nNumero de camarotes: " + ((Yates) b).getNumcamarotes() + "\nPrecio: " + b.calcularAlq(b.calcularModulo(b)) + "€");
         }
         if (b instanceof Bcarga) {
-            JOptionPane.showMessageDialog(null, "Carguero:\nMatricula: " + b.getMatricula() + "\nEslora: "+b.getEslora() +"\nNumero de dias: "+ b.getNdias() +"\nCarga:"+ ((Bcarga)b).getCarga()+"\nPrecio alquiler: "+b.calcularAlq(b.calcularModulo(b)));
+            JOptionPane.showMessageDialog(null, "Carguero:\nMatricula: " + b.getMatricula() + "\nEslora: " + b.getEslora() + "\nNumero de dias: " + b.getNdias() + "\nCarga:" + ((Bcarga) b).getCarga() + "\nPrecio alquiler: " + b.calcularAlq(b.calcularModulo(b)) + "€");
         }
-        
+
     }
-    
 
-    public String pedirMatricula() {
-        String matricula;
+    public String crearMatricula() {
+        String matricula = "";
+        int[] nMat = new int[4];
+        for (int i = 0; i < nMat.length; i++) {
+            nMat[i] = (int) (Math.random() * 9);
 
-        matricula = (JOptionPane.showInputDialog("Introduce matricula:"));
-
+        }
+        for (int i = 0; i < nMat.length; i++) {
+            matricula += nMat[i];
+        }
         return matricula;
+
     }
 
     public int pedirEslora() {
@@ -64,7 +69,7 @@ public class Modelo {
         do {
             eslora = Integer.parseInt(JOptionPane.showInputDialog("Introduce eslora:"));
             if (eslora <= 0) {
-                JOptionPane.showInputDialog("Eslora no valida");
+                JOptionPane.showMessageDialog(null, "Eslora no valida");
             }
         } while (eslora <= 0);
         return eslora;
@@ -86,7 +91,7 @@ public class Modelo {
         do {
             potencia = Integer.parseInt(JOptionPane.showInputDialog("Introduce potencia:"));
             if (potencia <= 0) {
-                JOptionPane.showInputDialog("Potencia no valida");
+                JOptionPane.showMessageDialog(null, "Potencia no valida");
             }
         } while (potencia <= 0);
         return potencia;
@@ -97,7 +102,7 @@ public class Modelo {
         do {
             numcam = Integer.parseInt(JOptionPane.showInputDialog("Introduce camarotes"));
             if (numcam <= 0) {
-                JOptionPane.showInputDialog("Numero de camarotes no validos");
+                JOptionPane.showMessageDialog(null, "Numero de camarotes no validos");
             }
         } while (numcam <= 0);
         return numcam;
@@ -119,7 +124,7 @@ public class Modelo {
         do {
             carga = Integer.parseInt(JOptionPane.showInputDialog("Introduce Carga:"));
             if (carga <= 0) {
-                JOptionPane.showInputDialog("Carga no valida");
+                JOptionPane.showMessageDialog(null, "Carga no valida");
             }
         } while (carga <= 0);
         return carga;
